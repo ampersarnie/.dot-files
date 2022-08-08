@@ -1,0 +1,8 @@
+.DS_Store
+
+.vscode
+
+.composer/*
+!.composer/config.json
+!.composer/composer.json
+!.composer/composer.lock

@@ -1,0 +1,19 @@
+[push]
+	default = current
+[core]
+	editor = code --wait
+[alias]
+    # List the parent branch of the current active branch.
+    parent = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
+[apply]
+    # Detect whitespace errors when applying a patch.
+    whitespace = fix
+[branch]
+    # Show most recently changed branches first.
+	sort = -committerdate
+[color]
+    # Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+    ui = auto
+[init]
+	defaultBranch = main
