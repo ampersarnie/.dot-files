@@ -12,6 +12,10 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+echo "Creating Developer dir"
+# MacOS has a dedicated Developer directory with icon.
+mkdir /Users/$(id -un)/Developer
+
 echo "Setting up trackpad"
 
 # Trackpad: enable tap to click for this user and for the login screen
@@ -29,7 +33,8 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
 # Finder: save screenshots to the desktop
-defaults write com.apple.screencapture location -string "${HOME}/Pictures/screencaptures"
+mkdir $HOME/Pictures/Screen\ Captures
+defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screen Captures"
 
 echo "Setting up Finder"
 
