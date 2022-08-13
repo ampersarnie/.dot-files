@@ -2,6 +2,9 @@
 
 .vscode
 
+private/*
+!private/setup.sh
+
 .composer/*
 !.composer/config.json
 !.composer/composer.json
