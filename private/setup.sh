@@ -1,5 +1,13 @@
 for d in private/*/ private/.*/ ; do
-    [ -L "${d%/}|../" ] && continue
-    echo "Running $d"
-    # sh $d/setup.sh 2> /dev/null
+    [ -L "${d%/}" ] && continue
+    if [ $d == 'private/*/' ]; then
+        continue
+    elif [ $d == 'private/./' ]; then
+        continue
+    elif [ $d == 'private/../' ]; then
+        continue
+    else
+        echo "Running ${d}setup.sh"
+        sh "${d}setup.sh" 
+    fi
 done

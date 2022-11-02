@@ -14,6 +14,8 @@ PHPVERSION=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
 export PATH="/usr/local/opt/php@$PHPVERSION/bin:$PATH"
 export PATH="/usr/local/opt/php@$PHPVERSION/sbin:$PATH"
 
+export PATH="$HOME/.pyenv/shims:$PATH"
+
 # -----
 # NVM Load
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

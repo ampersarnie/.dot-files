@@ -17,3 +17,6 @@
     ui = auto
 [init]
 	defaultBranch = main
+[user]
+	name = Paul Taylor
+	email = paul@bigbite.net
