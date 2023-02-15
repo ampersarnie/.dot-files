@@ -3,7 +3,13 @@ echo "Set up Brew"
 
 # Set brew location for Mac M# machines
 # This is added properly via .bashrc later
-eval $(/opt/homebrew/bin/brew shellenv)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 echo "Brew - Setup PHP Versions"
 brew tap shivammathur/php
