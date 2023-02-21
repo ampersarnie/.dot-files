@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "Set up Brew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -18,7 +20,8 @@ brew install shivammathur/php/php@8.0
 brew install shivammathur/php/php@8.1
 
 echo "Brew - Set PHP to v8.0"
-brew unlink php && brew link --overwrite --force php@8.0
+brew unlink php 2> /dev/null
+brew link --overwrite --force php@8.0
 
 echo "Brew - Install Node"
 brew install node
@@ -34,4 +37,10 @@ nvm install 12
 nvm use system
 
 echo "Brew - Install NGrok"
-brew install ngrok
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew install --cask ngrok
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+fi

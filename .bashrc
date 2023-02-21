@@ -16,15 +16,25 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
     export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
     export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+
+    # PHP -- After Homebrew due being loaded in by it.
+    PHPVERSION=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
+    export PATH="/home/linuxbrew/.linuxbrew/opt/php@$PHPVERSION/bin:$PATH"
+    export PATH="/home/linuxbrew/.linuxbrew/opt/php@$PHPVERSION/sbin:$PATH"
 else
     export PATH="/opt/homebrew/bin:$PATH"
+
+    # PHP -- After Homebrew due being loaded in by it.
+    PHPVERSION=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
+    export PATH="/usr/local/opt/php@$PHPVERSION/bin:$PATH"
+    export PATH="/usr/local/opt/php@$PHPVERSION/sbin:$PATH"
 fi
-# PHP -- After Homebrew due being loaded in by it.
-PHPVERSION=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
-export PATH="/usr/local/opt/php@$PHPVERSION/bin:$PATH"
-export PATH="/usr/local/opt/php@$PHPVERSION/sbin:$PATH"
+
 
 export PATH="$HOME/.pyenv/shims:$PATH"
+
+export KITTY_CONFIG_DIRECTORY="~/.dot-files/profiles/kitty"
+export VISUAL="nano"
 
 # -----
 # NVM Load
@@ -33,10 +43,6 @@ export PATH="$HOME/.pyenv/shims:$PATH"
 
 # Switch PHP versions with Brew
 sphp() {
-    brew unlink php && brew link --overwrite --force php@$1
+    SET_VERSION=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
+    brew unlink "php@$SET_VERSION" && brew link --overwrite --force php@$1
 }
-
-export PS1
-
-# Set Cursor to start at bottom of screen on new window.
-printf '\n%.0s' {1..100}

@@ -14,17 +14,8 @@ sh $SETUP_DIR/composer.sh 2> /dev/null
 if [[ "$OSTYPE" == "darwin"* ]]; then
     sh $SETUP_DIR/docker.sh 2> /dev/null
     sh $SETUP_DIR/profiles.sh 2> /dev/null
-fi
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sudo apt install zsh --yes
-    chsh -s $(which zsh)
-fi
-
-if [[ ! -d ~/.oh-my-zsh ]]; then
-    echo "Install OhMyZSH"
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
+file
+sh $SETUP_DIR/zsh.sh
 
 echo "Run Setup private commands"
 sh $DOT_DIR/private/setup.sh 2> /dev/null
@@ -35,14 +26,7 @@ ln -s $DOT_DIR/.gitconfig $HOME/.gitconfig 2> /dev/null # Set as symlink
 cp $DOT_DIR/.hushlogin $HOME/.hushlogin # Copy file
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-
-    # Kitty Terminal
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
-    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-    cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+    sh $SETUP_DIR/linux/kitty.sh
 
     # VS Code
     sudo apt install software-properties-common apt-transport-https wget
