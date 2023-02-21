@@ -16,6 +16,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     sh $SETUP_DIR/profiles.sh 2> /dev/null
 fi
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    sudo apt install zsh --yes
+    chsh -s $(which zsh)
+fi
+
 if [[ ! -d ~/.oh-my-zsh ]]; then
     echo "Install OhMyZSH"
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -28,6 +33,40 @@ echo "Set dot files"
 echo "source ./.dot-files/.bashrc" >> ~/.zshrc
 ln -s $DOT_DIR/.gitconfig $HOME/.gitconfig 2> /dev/null # Set as symlink
 cp $DOT_DIR/.hushlogin $HOME/.hushlogin # Copy file
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
+    # Kitty Terminal
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+    ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+    cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+
+    # VS Code
+    sudo apt install software-properties-common apt-transport-https wget
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt update --yes && sudo apt upgrade
+    sudo apt install code --yes
+
+    # Docker Engine
+    # https://docs.docker.com/engine/install/ubuntu/
+    sudo apt-get install \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+    sudo mkdir -m 0755 -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    sudo apt update --yes && sudo apt upgrade
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin --yes
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Starting MacOS Config"
