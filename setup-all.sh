@@ -28,6 +28,10 @@ cp $DOT_DIR/.hushlogin $HOME/.hushlogin # Copy file
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     sh $SETUP_DIR/linux/kitty.sh
 
+    # Tweaktool
+    sudo add-apt-repository universe
+    sudo apt install gnome-tweaks
+
     # VS Code
     sudo apt install software-properties-common apt-transport-https wget
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
