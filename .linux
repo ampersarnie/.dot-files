@@ -1,2 +1,2 @@
 # Set the control button for windows to be on the left, like MacOS.
-gsettings set org.gnome.desktop.wm.preferences button-layout close,minimize,maximize
+gsettings set org.gnome.desktop.wm.preferences button-layout close,minimize,maximize:
