@@ -16,6 +16,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     sh $SETUP_DIR/profiles.sh 2> /dev/null
 file
 sh $SETUP_DIR/zsh.sh
+sh $SETUP_DIR/kitty.sh
 
 echo "Run Setup private commands"
 sh $DOT_DIR/private/setup.sh 2> /dev/null
@@ -26,8 +27,6 @@ ln -s $DOT_DIR/.gitconfig $HOME/.gitconfig 2> /dev/null # Set as symlink
 cp $DOT_DIR/.hushlogin $HOME/.hushlogin # Copy file
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    sh $SETUP_DIR/linux/kitty.sh
-
     # Tweaktool
     sudo add-apt-repository universe
     sudo apt install gnome-tweaks
