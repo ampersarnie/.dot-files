@@ -1,2 +1,10 @@
 # Set the control button for windows to be on the left, like MacOS.
 gsettings set org.gnome.desktop.wm.preferences button-layout close,minimize,maximize:
+
+echo "clear control
+clear mod1
+keycode 37 = Alt_L Meta_L
+keycode 64 = Control_L
+add control = Control_L
+add mod1 = Alt_L Meta_L" >> $HOME/.Xmodmap
+xmodmap ~/.Xmodmap

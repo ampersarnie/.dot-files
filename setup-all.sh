@@ -62,5 +62,6 @@ fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Starting Linux Config"
+    touch $HOME/.Xmodmap # For keyboard mapping
     sh $DOT_DIR/.linux
 fi
