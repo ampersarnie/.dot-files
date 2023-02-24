@@ -15,7 +15,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
         $HOME/.dot-files/profiles/kitty/current-theme.conf
 fi
 
-if [[ "$OSTYPE" == "darwin" ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
     ln -sf $HOME/.dot-files/profiles/kitty/kitty.conf $HOME/.config/kitty/
     ln -sf $HOME/.dot-files/profiles/kitty/current-theme.conf $HOME/.config/kitty/
 fi
+
+ln -sf $HOME/.dot-files/profiles/kitty/${OSTYPE//[^[:alpha:]]/}-kitty.conf $HOME/.config/kitty/os-kitty.conf
