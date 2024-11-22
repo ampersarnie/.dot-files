@@ -16,7 +16,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     sh $SETUP_DIR/profiles.sh 2> /dev/null
 file
 sh $SETUP_DIR/zsh.sh
-sh $SETUP_DIR/kitty.sh
 
 echo "Run Setup private commands"
 sh $DOT_DIR/private/setup.sh 2> /dev/null

@@ -33,7 +33,6 @@ fi
 
 export PATH="$HOME/.pyenv/shims:$PATH"
 
-export KITTY_CONFIG_DIRECTORY="~/.dot-files/profiles/kitty"
 export VISUAL="nano"
 
 # -----

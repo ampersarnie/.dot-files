@@ -1,0 +1,4 @@
+[user]
+    email = paul@bigbite.net
+[include]
+	path = ~/.dot-files/profiles/.gitconfig
